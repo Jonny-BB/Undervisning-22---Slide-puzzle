@@ -1,14 +1,11 @@
-let puzles
-const tiles=[]
-let pictures =[]
+const tiles = [];
+let img = [];
 
-function preload (){
-  for (let i = 0; i <= 15; i++){
-    for (let y = 0; y <= 15; y++) {
-      let image = loadImage("assets/img"+i+".png")
-      pictures.push(image)
-      tiles.push(new Tile(400 * i ,400 * y,random(pictures),windowWidth/4,windowHeight/4))
-    }
+function preload() {
+  for (let i = 0; i < 15; i++) {
+    let image = loadImage("assets/img" + i + ".png");
+    img.push(image);
+    tiles.push(new Tile(img[i]));
   }
 }
 
@@ -18,9 +15,14 @@ function setup() {
 
 function draw() {
   background(220);
-
-  for (let Tile of tiles){
-    Tile.display();
+  let x = 0;
+  let y = 0;
+  for (let Tile of tiles) {
+    image(Tile.sprite, x, y, width / 4, height / 4);
+    x += width / 4;
+    if (x >= width) {
+      x = 0;
+      y += height / 4;
+    }
   }
 }
-
